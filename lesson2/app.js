@@ -1,2 +1,0 @@
-require('./multiplication')
-// require('./division')

@@ -1,7 +1,7 @@
 const num1 = 10;
 const num2 = 5;
 
-const divideFunc = require("./division");
+const divideFunc = require("./6-division");
 
 function multiplyNums(number1, number2) {
   console.log(`answer is : ${number1 * number2}`);

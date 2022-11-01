@@ -5,11 +5,8 @@ const numbers = require("./numbers");
 
 const name = readFileSync("./assets/name.txt", "utf-8");
 
-const tempAdd = func.addition(numbers.num1, numbers.num2);
-const resultAdd = func.addition(tempAdd, numbers.num3);
-
-const tempMult = func.multiplication(numbers.num1, numbers.num2);
-const resultMult = func.multiplication(tempMult, numbers.num3);
+const resultAdd = func.addition(func.addition(numbers.num1, numbers.num2), numbers.num3);
+const resultMult = func.multiplication(func.multiplication(numbers.num1, numbers.num2), numbers.num3);
 
 const server = http.createServer((req, res) => {
   if (req.url === "/") {
