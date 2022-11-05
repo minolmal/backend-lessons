@@ -2,13 +2,18 @@
   "name": "backend-lesson",
   "version": "1.0.0",
   "description": "Backend lessons - NIBM",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./2-lesson/13-npm-intro",
+    "dev" : "nodemon ./2-lesson/13-npm-intro"
   },
   "author": "Minol Hewage",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
