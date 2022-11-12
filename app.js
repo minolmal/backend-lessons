@@ -26,5 +26,5 @@ const app = express()
 app.use(express.static('./express-lesson/nav-bar/'))
 
 app.listen(5000,()=>{
-  console.log('server: htpp://localhost:5000')
+  console.log('server: http://localhost:5000')
 })
