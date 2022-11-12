@@ -1,27 +1,21 @@
-const { readFile, writeFile } = require("fs").promises;
-// const util = require("util");
+var fs = require("fs");
+var http = require("http");
 
-// const readFilePromise = util.promisify(readFile);
-// const writeFilePromise = util.promisify(writeFile);
-
-
-const start = async () => {
-  try {
-    const first = await readFile(
-      "./2-lesson/content/first.txt",
-      "utf-8"
-    );
-    const second = await readFile(
-      "./2-lesson/content/second.txt",
-      "utf-8"
-    );
-    await writeFile("./2-lesson/content/promise_result.txt",`Promise result: ${first}, ${second}`,{flag: 'a'});
-    // console.log(first);
-    // console.log(second);
-    console.log("written to file")
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-start();
+http
+  .createServer((req, res) => {
+    if (req.url === "/") {
+      const indexFile = fs.readFileSync('./index.html')
+      res.writeHead(200, { "content-type": "text/html" });
+      res.write(indexFile);
+      res.end();
+    } else if (req.url === "/about") {
+      res.writeHead(200, { "content-type": "text/html" });
+      res.write("<h1> About </h1>");
+      res.end();
+    } else {
+      res.writeHead(404);
+      res.write("<h1> Page not found </h1>");
+      res.end();
+    }
+  })
+  .listen(5000);

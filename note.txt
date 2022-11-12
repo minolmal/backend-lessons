@@ -1,0 +1,4 @@
+REST API - Representational State Transfer <- architecture
+HTTP - hypertext Transfer protocol <- protocol
+JSON - Javascript Object Notation <- represents structure of data
+API - Application Programming Interface <- defined way of communication
