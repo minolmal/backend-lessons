@@ -1,23 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import Card from "./components/Card";
 import axios from "axios";
+import CardList from "./components/CardList";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  axios
-    .get("http://localhost:5000/api/products")
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/products")
+      .then((response) => {
+        // console.log(response.data);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
-    <div className="App">
-      <Card />
+    <div
+      className=""
+      style={{ marginTop: "10px" }}>
+      <h1>Products</h1>
+      <CardList products={data} />
     </div>
   );
 }
