@@ -3,12 +3,11 @@ const { products } = require("./data");
 
 const app = express();
 
-// app.use(express.static('./express-lesson/nav-bar/'))
 app.get("/", (req, res) => {
-  // res.json([{ name: "minol" }, { name: "sampath" }]);
   // res.json(products)
   res.write('<h1>Home Page</h1><h2><a href="/api/products">Products</a></h2>');
 });
+
 app.get("/api/products", (req, res) => {
   const newProducts = products.map((product) => {
     const { id, name, image } = product;
@@ -16,8 +15,9 @@ app.get("/api/products", (req, res) => {
   });
   res.json(newProducts);
 });
+
+// passing route params as variables
 app.get("/api/products/:productId", (req, res) => {
-  // console.log(req);
   // console.log(req.params);
   const { productId } = req.params;
   const selectedProduct = products.find(
@@ -28,12 +28,15 @@ app.get("/api/products/:productId", (req, res) => {
   }
   return res.json(selectedProduct);
 });
+
 app.get("/api/products/:productId/review/:reviewTitle", (req, res) => {
   // console.log(req.params);
   const { productId, reviewTitle } = req.params;
   console.log(reviewTitle);
   res.send("hello");
 });
+
+// passing route query as variables || /api/v1/query?search=a&limit=2
 app.get("/api/v1/query", (req, res) => {
   // console.log(req.query);
   const { search, limit } = req.query;

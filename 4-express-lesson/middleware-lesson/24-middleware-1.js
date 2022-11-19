@@ -3,8 +3,8 @@ const { json, query, application } = require("express");
 const express = require("express");
 const app = express();
 const { myLog } = require("./logger");
-const { authorize } = require("./authorize");
 
+//  moved to logger.js
 // function myLog(req, res, next) {
 //   const method = req.method;
 //   const url = req.url;
@@ -13,27 +13,10 @@ const { authorize } = require("./authorize");
 //   next();
 // }
 
-// app.get("/", myLog, (req, res) => {
-//   res.send("home");
-// });
-// app.get("/about", myLog, (req, res) => {
-//   res.send("about");
-// });
-
-// app.use( myLog);
-// app.get("/", (req, res) => {
-//   res.send("home");
-// });
-// app.get("/about", (req, res) => {
-//   res.send("about");
-// });
-
-app.use(myLog, authorize);
-
-app.get("/", (req, res) => {
+app.get("/", myLog, (req, res) => {
   res.send("home");
 });
-app.get("/about", (req, res) => {
+app.get("/about", myLog, (req, res) => {
   res.send("about");
 });
 

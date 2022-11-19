@@ -1,15 +1,14 @@
 //req => middleware => res
-//1. route vs use
-//options - our own/express/third party
-
-//app.use([logger,authorize])
-//app.use(express.static('public'))
 const { json, query, application } = require("express");
 const express = require("express");
 const app = express();
-var morgan = require("morgan");
+const { myLog } = require("./logger");
+const { authorize } = require("./authorize");
 
-app.use(morgan("tiny"));
+// middleware loaded with app.use
+app.use(myLog, authorize);
+
+// [logger,authorize] add this to single route use use in single mode
 
 app.get("/", (req, res) => {
   res.send("home");
