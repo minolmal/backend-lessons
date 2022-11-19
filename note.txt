@@ -2,3 +2,7 @@ REST API - Representational State Transfer <- architecture
 HTTP - hypertext Transfer protocol <- protocol
 JSON - Javascript Object Notation <- represents structure of data
 API - Application Programming Interface <- defined way of communication
+
+API =>  create a HTTP interface
+        send data
+        JSON format
