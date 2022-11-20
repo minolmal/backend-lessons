@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
 const { products } = require("./data");
 
 const app = express();
-app.use(cors());
+app.use(cors(),morgan("dev"));
 
 app.get("/", (req, res) => {
   res.write('<h1>Home Page</h1><h2><a href="/api/products">Products</a></h2>');
@@ -17,18 +18,17 @@ app.get("/api/products", (req, res) => {
   res.json(newProducts);
 });
 
-// app.get("/api/products/:productId", (req, res) => {
-//   // console.log(req);
-//   // console.log(req.params);
-//   const { productId } = req.params;
-//   const selectedProduct = products.find(
-//     (product) => product.id === Number(productId)
-//   );
-//   if (!selectedProduct) {
-//     return res.status(404).send(`Product ${productId} not found`);
-//   }
-//   return res.json(selectedProduct);
-// });
+app.get("/api/products/:productId", (req, res) => {
+  const { productId } = req.params;
+  const selectedProduct = products.find(
+    (product) => product.id === Number(productId)
+  );
+  if (!selectedProduct) {
+    return res.status(404).send(`Product ${productId} not found`);
+  }
+  return res.json(selectedProduct);
+});
+
 // app.get("/api/products/:productId/review/:reviewTitle", (req, res) => {
 //   // console.log(req.params);
 //   const { productId, reviewTitle } = req.params;
@@ -59,3 +59,4 @@ app.get("/api/products", (req, res) => {
 app.listen(5000, () => {
   console.log("server: http://localhost:5000");
 });
+
