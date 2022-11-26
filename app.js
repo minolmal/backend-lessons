@@ -34,9 +34,9 @@ app.get("/", (req, res) => {
 // task
 
 // frontend
-// add employee ->form{emp num, name,department,basic salary}+create -> list{employee+edit+delete}
+// add employee ->form{emp num, name,department,basic salary}+create -> list entries{employee with edit+delete}
 // edit -> form{...emp num not editable}
-// delete -> list entry
+// delete -> delete list entry
 
 // backend
 // mysql db with employees
