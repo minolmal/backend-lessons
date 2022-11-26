@@ -1,9 +1,12 @@
 import React from "react";
+import SingleProduct from "./SingleProduct";
 
-const Card = ({id, name, image }) => {
+const Card = ({ id, name, image, showProduct }) => {
   return (
-    <a href="#" className="ui raised card">
-      <div className="image">
+    <button
+      className="ui link card"
+      onClick={() => (showProduct = id)}>
+      <div className=" ui image">
         <img
           src={image}
           alt={name}
@@ -12,7 +15,7 @@ const Card = ({id, name, image }) => {
       <div className="content">
         <div className="header">{name}</div>
       </div>
-    </a>
+    </button>
   );
 };
 
