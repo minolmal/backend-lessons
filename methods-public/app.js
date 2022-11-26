@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const { products, people } = require("./data");
+const { map } = require("lodash");
 
 const app = express();
 app.use(cors(), morgan("dev"));
@@ -25,6 +26,36 @@ app.post("/api/people", (req, res) => {
       .json({ success: false, msg: "Please provide a name" });
   }
   res.status(201).json({ success: true, person: name });
+});
+
+// url/:id
+app.put("/api/people/:id", (req, res) => {
+  let { id } = req.params;
+  let { name } = req.body;
+  console.log(id, name);
+  console.log(people);
+  const person = people.find((person) => person.id === Number(id));
+  if (!person) {
+    return res.status(400).json({ success: false, msg: "ID not found" });
+  }
+
+  const newPeople = people.map((person) => {
+    if (person.id === Number(id)) {
+      person.name = name;
+    }
+    return person;
+  });
+  res.status(201).json({ success: true, data: newPeople });
+});
+
+app.post("/api/postman/people", (req, res) => {
+  const { name } = req.body;
+  if (!name) {
+    return res
+      .status(400)
+      .json({ success: false, msg: "Please provide a name" });
+  }
+  res.status(201).json({ success: true, data: [...people, name] });
 });
 
 app.post("/login", (req, res) => {
