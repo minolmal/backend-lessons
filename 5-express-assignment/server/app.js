@@ -1,13 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const { products } = require("./data");
+const { products, people } = require("./data");
 
 const app = express();
-app.use(cors(),morgan("dev"));
+app.use(cors(), morgan("dev"));
 
 app.get("/", (req, res) => {
-  res.write('<h1>Home Page</h1><h2><a href="/api/products">Products</a></h2>');
+  res.write(
+    '<h1>Home Page</h1><h2><a href="/api/products">Products</a></h2><h2><a href="/api/people">People</a></h2>'
+  );
 });
 
 app.get("/api/products", (req, res) => {
@@ -56,7 +58,14 @@ app.get("/api/products/:productId", (req, res) => {
 //   res.json(result);
 // });
 
+app.get("/api/people", (req, res) => {
+  const newPeople = people.map((person) => {
+    const { id, name } = person;
+    return { id, name };
+  });
+  res.json(newPeople);
+});
+
 app.listen(5000, () => {
   console.log("server: http://localhost:5000");
 });
-
